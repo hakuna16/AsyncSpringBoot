@@ -1,4 +1,4 @@
-# Asynchronous Behavior in Spring Boot Application
+# Async Spring Boot Application
 
 We can achieve asynchronous behavior in spring boot application using two annotations like :
 
