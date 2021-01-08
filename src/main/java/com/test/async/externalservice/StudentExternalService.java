@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import com.test.async.configurations.RequestTraceId;
 import com.test.async.entities.StudentDetails;
 
+import org.slf4j.MDC;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.core.ParameterizedTypeReference;
@@ -35,7 +36,7 @@ public class StudentExternalService {
         final String url = "http://demo9128426.mockable.io/student";
         HttpHeaders commonHeader = new HttpHeaders();
         commonHeader.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        commonHeader.add(RequestTraceId.TRACE_ID, RequestTraceId.getTraceId());
+        commonHeader.add(RequestTraceId.TRACE_ID, MDC.getCopyOfContextMap().get(RequestTraceId.TRACE_ID));
 
         log.info("calling external service to get student id's: {}", Thread.currentThread().getName());
         ResponseEntity<List<Integer>> response = restTemplate.exchange(url, HttpMethod.GET,
@@ -52,7 +53,7 @@ public class StudentExternalService {
 
         HttpHeaders commonHeader = new HttpHeaders();
         commonHeader.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        commonHeader.add(RequestTraceId.TRACE_ID, RequestTraceId.getTraceId());
+        commonHeader.add(RequestTraceId.TRACE_ID, MDC.getCopyOfContextMap().get(RequestTraceId.TRACE_ID));
 
         log.info("calling external service to get student detials: {}", Thread.currentThread().getName());
         ResponseEntity<List<StudentDetails>> response = restTemplate.exchange(url, HttpMethod.GET,
