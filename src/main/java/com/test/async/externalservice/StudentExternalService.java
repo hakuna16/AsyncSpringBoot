@@ -9,8 +9,6 @@ import com.test.async.configurations.RequestTraceId;
 import com.test.async.entities.StudentDetails;
 
 import org.slf4j.MDC;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
